@@ -1,0 +1,38 @@
+kind: pipeline
+name: default
+
+platform:
+  os: linux
+  arch: amd64
+
+services:
+- name: redis
+  pull: if-not-exists
+  image: redis:latest 
+  
+#- name: send telegram notification
+#  image: appleboy/drone-telegram
+#  settings:
+#    token: 681014526:AAG_5wpX_rrqzRoUhT8ED4KTr-d-gOGTllI
+#    to: @sschris
+  
+steps:
+- name: frontend
+  pull: if-not-exists
+  image: node:8.1.2
+  commands:
+  - node -v
+  - npm -v
+  
+
+- name: backend
+  pull: if-not-exists
+  image: sschris/docklock
+  commands:
+  - php -v
+  - composer -V
+  - cp .env.example .env
+  - composer install --prefer-dist
+  - php artisan key:generate
+  - php artisan migrate
+  - ./vendor/bin/phpunit tests/Unit/RedisTest.php
