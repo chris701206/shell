@@ -1,3 +1,4 @@
+#!/bin/bash
 sed -i -e 's/#PasswordAuthentication yes/PasswordAuthentication yes/i' /etc/ssh/sshd_config
 sed -i -e 's/PasswordAuthentication no/#PasswordAuthentication no/i' /etc/ssh/sshd_config
 systemctl restart sshd
