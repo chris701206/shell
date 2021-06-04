@@ -1,6 +1,6 @@
 #!/bin/bash
 #yum update
-user=qqadmin
+user=myadmin
 authkey=" [PUBLIC key放這]  "
 #if [ ! $(cat /etc/passwd|grep ^${user}) ]; then
 useradd $user
@@ -28,5 +28,5 @@ fi
 chmod 440 /etc/sudoers
 
 # cat /etc/*release*|grep ID
-echo "qqadmin       ALL=(ALL)       NOPASSWD:ALL">>/etc/sudoers
+echo "myadmin       ALL=(ALL)       NOPASSWD:ALL">>/etc/sudoers
 sudo -i
