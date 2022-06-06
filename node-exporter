@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  node_exporter:
+    image: prom/node-exporter:v1.3.1
+    command:
+      - '--path.rootfs=/host'
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
+    ports:
+      - "9100:9100"
